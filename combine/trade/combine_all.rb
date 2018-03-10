@@ -13,4 +13,10 @@ data = files.each.with_object([]) do |f, o|
 end
 
 data.sort_by! { |d| Time.parse(d['Date']) }
-p data
+data.size.times do |i|
+  t = Time.parse(data[i]['Date']).strftime("%y") # TODO: repair
+end
+header = %w[Date Dealer Exchange1 Exchange2 Type Quantity Limit CommissionPaid Price]
+puts CSV.generate('', headers: header, write_headers: true) { |csv|
+  data.each { |d| csv << d }
+}
