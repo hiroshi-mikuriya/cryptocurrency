@@ -14,7 +14,7 @@ end
 
 data.sort_by! { |d| Time.parse(d['Date']) }
 data.size.times do |i|
-  t = Time.parse(data[i]['Date']).strftime("%y") # TODO: repair
+  data[i]['Date'] = Time.parse(data[i]['Date']).strftime("%Y/%m/%d")
 end
 header = %w[Date Dealer Exchange1 Exchange2 Type Quantity Limit CommissionPaid Price]
 puts CSV.generate('', headers: header, write_headers: true) { |csv|
