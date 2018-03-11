@@ -1,7 +1,7 @@
 require 'csv'
 require 'time'
 
-TIME_LIMIT = Time.parse('2018/1/1').freeze
+TIME_LIMIT = Time.parse('2018/3/1').freeze
 
 trade = CSV.read('all_trade.csv', headers: true)
 o = Hash.new { |h, k| h[k] = 0.0 }
