@@ -1,7 +1,7 @@
 require 'csv'
 require 'time'
 
-TIME_LIMIT = Time.parse('2018/3/1').freeze
+TIME_LIMIT = Time.parse('2018/1/1').freeze
 
 trade = CSV.read('all_trade.csv', headers: true)
 o = Hash.new { |h, k| h[k] = 0.0 }
@@ -27,4 +27,5 @@ deposit.each do |c|
   jpy = c['UNITS'].to_f
   o['JPY'] += (c['TO'] == 'BANK')? -jpy : jpy
 end
+o.each_key { |k| o.delete(k) if o[k].abs < 1.0e-4 }
 o.each { |cur, amount| puts %(#{cur} : #{amount}) }
